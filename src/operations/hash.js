@@ -8,7 +8,14 @@ export function hash(args) {
   try {
     const hash = createHash("sha256");
     const input = createReadStream(path.join(process.cwd(), args[0]));
-    input.pipe(hash).setEncoding("hex").pipe(process.stdout);
+
+    input
+      .on("error", () => process.stdout.write(`${OPERATION_FAILED} \n`))
+      .pipe(hash)
+      .on("error", () => process.stdout.write(`${OPERATION_FAILED} \n`))
+      .setEncoding("hex")
+      .pipe(process.stdout)
+      .on("error", () => process.stdout.write(`${OPERATION_FAILED} \n`));
   } catch {
     process.stdout.write(`${OPERATION_FAILED} \n`);
   }

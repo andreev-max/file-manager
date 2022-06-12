@@ -8,8 +8,10 @@ const readlineStream = readline.createInterface({
   output: process.stdout,
 });
 
-const userName =
-  process.argv.slice(2).join("").replace("--username=", "") || "Dear user";
+const userArgs = process.argv.slice(2).join("");
+const userName = userArgs.startsWith("--username=")
+  ? userArgs.replace("--username=", "")
+  : "Dear user";
 
 async function start() {
   process.chdir(os.homedir());
