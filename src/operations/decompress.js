@@ -13,7 +13,7 @@ export function decompress(args) {
 
     pipeline(source, brotli, destination, (err) => {
       if (err) {
-        console.log(err);
+        process.stdout.write(`${OPERATION_FAILED} \n`);
       }
     });
   } catch {

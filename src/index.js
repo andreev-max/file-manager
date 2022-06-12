@@ -13,7 +13,6 @@ const userName =
 
 async function start() {
   process.chdir(os.homedir());
-  console.log(os.cpus());
   process.stdout.write(`Welcome to the File Manager, ${userName}! \n \n`);
   process.stdout.write(`You are currently in ${process.cwd()}`);
   process.stdout.write("\n \n");
